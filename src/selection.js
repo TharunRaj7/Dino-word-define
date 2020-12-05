@@ -20,6 +20,7 @@ chrome.runtime.onMessage.addListener(
   var name = definitionView.innerText;
      var audioLink= definitionJSON[0]["phonetics"][0]["audio"]
   exampleModal = getExampleModal();
+  
   console.log(word)
   // Init the modal if it hasn't been already.
   if (!exampleModal) { exampleModal = initExampleModal(); }
@@ -61,22 +62,40 @@ chrome.runtime.onMessage.addListener(
   var st = exampleModal.style;
   st.display = "block";
   st.top = "10px";
+  st.minWidth = "10%";
   st.left = "70%";
   st.padding="1%";
-  st.width = "100%";
+  st.minWidth = "10%";
   st.minHeight= toolbarHeight + "px";
   st.color = "white";
   st.fontStyle = "italic";
   st.position = "fixed";
   st.background='black'
-  
+  // exampleModal.ondragover= (e)=> { exampleModal.style.left = e.pageX + 'px';
+  // exampleModal.style.top = e.pageY + 'px';}
+  // exampleModal.ondrag= (e)=> { exampleModal.style.left = e.pageX + 'px';
+  // exampleModal.style.top = e.pageY + 'px';}
+  exampleModal.ondragend= (e)=> { exampleModal.style.left = e.pageX + 'px';
+  exampleModal.style.top = e.pageY + 'px';}
   // document.body.style.webkitTransform = "translateY(" + toolbarHeight + "px)";
+  // exampleModal.addEventListener("drag", drags);
   document.documentElement.appendChild(exampleModal);
+  
+  
+// document.addEventListener('mousemove', onMouseMove);
+
+
   // Show the modal.
   // jQuery(exampleModal).modal('show');
       // document.body.insertBefore(exampleModal, document.body.firstChild);
     }
   });
+
+function drags(e){
+    exampleModal.style.left = e.pageX + 'px';
+    exampleModal.style.top = e.pageY + 'px';
+  
+}
 
 function check(){
   console.log("hello")
@@ -106,6 +125,7 @@ function check(){
     modal.setAttribute('role', 'dialog');
     modal.setAttribute('aria-labelledby', 'exampleModalLabel');
     modal.setAttribute('aria-hidden', 'true');
+    modal.setAttribute("draggable", true)
     modal.innerHTML =
           '<div class="modal-dialog" role="document">' +
             '<div class="modal-content"></div>' +

@@ -1,0 +1,33 @@
+{
+  "name": "Dino: Your browsing thesaurus",
+  "version": "0.0.1",
+  "manifest_version": 2,
+
+  "description": "Extension to look up words, pronunciations, and learn on the fly.",
+  "homepage_url": "https://google.com",
+  "permissions": ["contextMenus", "tabs", "activeTab"],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "options_page": "src/options_custom/index.html",
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "browser action demo",
+    "default_popup": "src/popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/selection.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ]
+}

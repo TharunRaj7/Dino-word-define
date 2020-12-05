@@ -66,6 +66,7 @@ chrome.runtime.onMessage.addListener(
   st.left = "70%";
   st.padding="1%";
   st.minWidth = "10%";
+  st.zIndex="9999"
   st.minHeight= toolbarHeight + "px";
   st.color = "white";
   st.fontStyle = "italic";

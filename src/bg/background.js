@@ -7,21 +7,31 @@
 
 //example of using a message handler from the inject scripts
 chrome.extension.onMessage.addListener(
-  function(request, sender, sendResponse) {
-  	chrome.pageAction.show(sender.tab.id);
+  function (request, sender, sendResponse) {
+    chrome.pageAction.show(sender.tab.id);
     sendResponse();
   });
 
-  searchUrbanDict = function(word){
-    var query = word.selectionText;
-    chrome.tabs.create({url: "http://www.urbandictionary.com/define.php?term=" + query});
-    //chrome.tabs.create({url: "https://en.wikipedia.org/w/index.php?search=" + query + "&title=Special%3ASearch&go=Go"});
-  };
+const Http = new XMLHttpRequest();
+getSelectionDefinition = function (word) {
+  var query = word.selectionText;
+  // chrome.tabs.create({url: "http://www.urbandictionary.com/define.php?term=" + query});
+  var url = 'https://api.dictionaryapi.dev/api/v2/entries/en/' + query;
+  Http.open("GET", url);
+  Http.send();
+  Http.onreadystatechange = (e) => {
+    // console.log(Http.responseText);
+    var definition = Http.responseText;
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+      chrome.tabs.sendMessage(tabs[0].id, {greeting: "hello", "definition": definition}, function(response) {
+        console.log(response.farewell)
+      });  
+    });
+  }
+};
 
-  chrome.contextMenus.create({
-    title: "Define Dino",
-    contexts:["selection"],
-    onclick: searchUrbanDict
-  });
-
-  //chrome-extension://mmcalmneajaoifmdjhdingdflilbedho/src/browser_action/browser_action.html
+chrome.contextMenus.create({
+  title: "Define Dino",
+  contexts: ["selection"],
+  onclick: getSelectionDefinition
+});

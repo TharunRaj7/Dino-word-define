@@ -10,6 +10,7 @@ chrome.runtime.onMessage.addListener(
     if (request.greeting == "hello") {
       console.log("Received a definition!...")
       console.log(request.definition);
+      
       sendResponse({ farewell: "Content received definition..." });
       // after this point, can populate pop up, and make it visible.
       definitionJSON = JSON.parse(request.definition);
@@ -19,7 +20,7 @@ chrome.runtime.onMessage.addListener(
   var name = definitionView.innerText;
      var audioLink= definitionJSON[0]["phonetics"][0]["audio"]
   exampleModal = getExampleModal();
-
+  console.log(word)
   // Init the modal if it hasn't been already.
   if (!exampleModal) { exampleModal = initExampleModal(); }
   var html =

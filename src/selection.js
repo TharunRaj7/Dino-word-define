@@ -3,7 +3,7 @@ console.log("content script loaded...")
 // probably where we will create the pop up, and make it invisible
 var definitionView = document.createElement("h1");
 definitionView.innerHTML = "";
-
+var exampleModal;
 chrome.runtime.onMessage.addListener(
   function (request, sender, sendResponse) {
     console.log("received a message...")
@@ -18,7 +18,7 @@ chrome.runtime.onMessage.addListener(
       var word= definitionJSON[0]["word"]
   var name = definitionView.innerText;
      var audioLink= definitionJSON[0]["phonetics"][0]["audio"]
-  var exampleModal = getExampleModal();
+  exampleModal = getExampleModal();
 
   // Init the modal if it hasn't been already.
   if (!exampleModal) { exampleModal = initExampleModal(); }
@@ -26,9 +26,9 @@ chrome.runtime.onMessage.addListener(
       '<div class="modal-header">' +
         '<h5 class="modal-title" id="exampleModalLabel">'+word+'</h5>' +
       '</div>' + 
-      '<div class="modal-body">' +
+      '<div><div class="modal-body">' +
         name +
-      '</div>' + 
+      '</div></div>' + 
       '<div class="modal-body">' +
       '<audio controls> <source src='+audioLink+ ' type="audio/mpeg">Your browser does not support the audio element. </audio>' +
       '</div>';
@@ -51,10 +51,29 @@ chrome.runtime.onMessage.addListener(
 
   setExampleModalContent(html, footer, linebreak);
 
+  var toolbarHeight = 180;
 
+  // var div = document.createElement("div");
+  // div.id = "myToolbar";
+  // div.textContent = "I am the toolbar !";
+  
+  var st = exampleModal.style;
+  st.display = "block";
+  st.top = "10px";
+  st.left = "65%";
+  st.padding="1%";
+  st.width = "100%";
+  st.minHeight= toolbarHeight + "px";
+  st.color = "white";
+  st.fontStyle = "italic";
+  st.position = "fixed";
+  st.background='black'
+  
+  // document.body.style.webkitTransform = "translateY(" + toolbarHeight + "px)";
+  document.documentElement.appendChild(exampleModal);
   // Show the modal.
   // jQuery(exampleModal).modal('show');
-      document.body.insertBefore(exampleModal, document.body.firstChild);
+      // document.body.insertBefore(exampleModal, document.body.firstChild);
     }
   });
 
@@ -69,6 +88,8 @@ function check(){
   function remove(){
     // getExampleModal().querySelector('.modal-content').removeChild(footer);
     getExampleModal().querySelector('.modal-content').innerHTML = "";
+    exampleModal.style.display='none'
+    document.body.style.webkitTransform = "translateY(" + 0 + "px)";
   }
   
   function setExampleModalContent(html, footer, linebreak) {

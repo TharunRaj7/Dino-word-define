@@ -67,7 +67,11 @@
 }
 
 .modal-body{
-    margin:10px
+    margin:10px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: normal;
 }
 
 body {

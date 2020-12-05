@@ -68,8 +68,9 @@
 
 .modal-body{
     margin:10px;
+    max-width:300px;
+    word-wrap:break-word;
     white-space: pre-wrap;
-    word-wrap: break-word;
     word-break: break-word;
     overflow-wrap: normal;
 }

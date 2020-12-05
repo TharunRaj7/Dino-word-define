@@ -60,7 +60,7 @@ chrome.runtime.onMessage.addListener(
   var st = exampleModal.style;
   st.display = "block";
   st.top = "10px";
-  st.left = "65%";
+  st.left = "70%";
   st.padding="1%";
   st.width = "100%";
   st.minHeight= toolbarHeight + "px";

@@ -5,7 +5,7 @@
 
   "description": "Extension to look up words, pronunciations, and learn on the fly.",
   "homepage_url": "https://google.com",
-  "permissions": ["contextMenus", "tabs", "activeTab"],
+  "permissions": ["contextMenus", "tabs", "activeTab", "<all_urls>"],
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
@@ -20,14 +20,14 @@
   "browser_action": {
     "default_icon": "icons/icon19.png",
     "default_title": "browser action demo",
-    "default_popup": "src/popup/popup.html"
+    "default_popup": "src/browser_action/browser_action.html"
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
+      "all_frames": true,
       "js": ["src/selection.js"],
-      "run_at": "document_start",
-      "all_frames": true
+      "run_at": "document_idle"
     }
   ]
 }

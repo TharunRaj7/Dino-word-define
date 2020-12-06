@@ -1,6 +1,6 @@
 // SAMPLE
 this.manifest = {
-    "name": "My Extension",
+    "name": "Dino: Thesaurus for Chrome.",
     "icon": "icon.png",
     "settings": [
         {

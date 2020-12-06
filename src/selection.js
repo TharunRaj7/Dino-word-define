@@ -25,22 +25,25 @@ chrome.runtime.onMessage.addListener(
       var audioLink = definitionJSON[0]["phonetics"][0]["audio"];
       var exampleModal = getExampleModal();
       var synonyms= definitionJSON[0]["meanings"][0]["definitions"][0]["synonyms"];
-      console.log(definitionJSON[0]["meanings"][0]["definitions"][0])
-      var str="Synonyms: "
+      console.log(definitionJSON[0]["meanings"][0]["definitions"][0]);
+      var str="Synonyms: ";
       if(synonyms!=undefined){
+        str += "<i> ";
         for(var i=0;i<synonyms.length;i++){
-          str+=synonyms[i]
-          str+=", "
+          str+=synonyms[i];
+          str+=", ";
         }
-        str=str.substring(0, str.length-2)
+        str=str.substring(0, str.length-2);
+        str += "</i>";
       }
-      console.log(str)
-      if(definitionJSON[0]["meanings"][0]["definitions"][0]["examples"].length>1){
-        var example= "Example: "+definitionJSON[0]["meanings"][0]["definitions"][0]["examples"][1];
-      }else{
-        var example= "Example: "+definitionJSON[0]["meanings"][0]["definitions"][0]["examples"][1];
-      }
-      var synonyms= 
+      console.log(str);
+      // if(definitionJSON[0]["meanings"][0]["definitions"][0]["examples"].length>1){
+      //   var example= "Example: "+definitionJSON[0]["meanings"][0]["definitions"][0]["examples"][1];
+      // }else{
+      //   var example= "Example: "+definitionJSON[0]["meanings"][0]["definitions"][0]["examples"][1];
+      // }
+      var example = "Example: " + "<i>" + definitionJSON[0]["meanings"][0]["definitions"][0]["example"] + "</i>";
+      // var synonyms= 
       console.log(word);
       //sendResponse({wordDefined: word});
       // Init the modal if it hasn't been already.
@@ -51,14 +54,13 @@ chrome.runtime.onMessage.addListener(
         '<h5 class="modal-title" id="exampleModalLabel">' + word + '</h5>' +
         '</div>' +
         '<div><div class="modal-body">' +
-        name +
+        name + 
         '</div></div>' +'<div><div class="modal-body">' +
         example +
         '</div></div>' + '<div><div class="modal-body">' +
         str +
         '</div></div>'+
         '<div class="modal-body">' +
-        '<p>Learn to Pronounce!</p>'+
         '<audio controls class="audio-class-in"> <source src=' + audioLink + ' type="audio/mpeg" class="source-class-in">Your browser does not support the audio element. </audio>' +
         '</div>';
       }else{
@@ -72,7 +74,6 @@ chrome.runtime.onMessage.addListener(
         example +
         '</div></div>' +
         '<div class="modal-body">' +
-        '<p>Learn to Pronounce!</p>'+
         '<audio controls class="audio-class-in"> <source src=' + audioLink + ' type="audio/mpeg" class="source-class-in">Your browser does not support the audio element. </audio>' +
         '</div>';
       }
@@ -118,7 +119,7 @@ chrome.runtime.onMessage.addListener(
       st.zIndex = "9999";
       st.minHeight = toolbarHeight + "px";
       st.color = "white";
-      st.fontStyle = "italic";
+      // st.fontStyle = "italic";
       st.position = "fixed";
       st.background = 'black';
       st.borderRadius="10px"

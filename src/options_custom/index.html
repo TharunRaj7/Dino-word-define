@@ -1,65 +1,59 @@
-<!--
-// Copyright (c) 2011 Frank Kohlhepp
-// https://github.com/frankkohlhepp/fancy-settings
-// License: LGPL v2.1
--->
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title id="title">Dino: Thesaurus for Chrome.</title>
-        
-        <!-- Stylesheets -->
-        <link id="favicon" rel="icon" href="/icons/icon48.png">
-        <link rel="stylesheet" href="lib/default.css" media="screen">
+
+<head>
+    <meta charset="utf-8">
+    <title id="title">Dino: Thesaurus for Chrome.</title>
+    <!-- Stylesheets -->
+    <link id="favicon" rel="icon" href="icons/icon48.png">
+    <!-- <link rel="stylesheet" href="lib/default.css" media="screen">
         <link rel="stylesheet" href="css/main.css" media="screen">
-        <link rel="stylesheet" href="css/setting.css" media="screen">
-        <link rel="stylesheet" href="custom.css" media="screen">
-        
-        <!-- JavaScripts -->
-        <script src="lib/mootools-core.js"></script>
-        <script src="lib/store.js"></script>
-        <script src="js/classes/tab.js"></script>
-        <script src="js/classes/setting.js"></script>
-        <script src="js/classes/search.js"></script>
-        <script src="js/classes/fancy-settings.js"></script>
-        <script src="i18n.js"></script>
-        <script src="js/i18n.js"></script>
-        <script src="manifest.js"></script>
-        <script src="settings.js"></script>
-    </head>
-    <body class="no-select">
-        <div id="sidebar" class="fancy">
-            <img id="icon" src="" alt=""><h1 id="settings-label"></h1>
-            <div id="tab-container">
-                <div id="search-container" class="tab">
-                    <input id="search" type="search" placeholder="">
-                </div>
-                <div>
-                    <button id = 'tester'>test</button>
+        <link rel="stylesheet" href="css/setting.css" media="screen"> -->
+    <link rel="stylesheet" href="index.css" media="screen">
+    <link href="https://fonts.googleapis.com/css?family=Hind&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="text" style="margin-top: 20px;">
+        <img src="icons/icon128.png" alt="logo" style="float: left;width: 50px;height: 50px;" />
+        <h1 style="float:left;position: relative; top: 10px; left: 5px;  vertical-align:middle;">Dino.</h1>
+    </div>
+    <center><h5 style="color:#00009c">[<i>noun</i>]: An online thesauraus to look up words, pronunciations, and
+        learn on the fly.</h5></center>
+
+    <div class="text" style="margin-left: 50px; margin-right: 50 px; text-align: center; max-width: 50%;">
+        <p>
+            Hi! Dino is a chrome extension that allows you to look up word meanings, examples, synonyms, and
+            pronunciations instantly!
+        </p>
+        <p>To use Dino, install it from the Chrome Web Store. Once you've done this, just select a word, right click and
+            select the Dino option! We'll take care of the rest.</p>
+
+        <p>Dino also emails you a weekly list of new words you've learned and saved! This allows you to retain & learn more, and makes learning languages super easy!</p>
+        <h2><u>Settings</u></h2>
+        <div>
+            <span>Receive Email List</span>
+            <label class="switch">
+                <input type="checkbox" id="email-choice">
+                <span class="slider round"></span>
+            </label>
+        </div>
+        <div>
+            <span>Language choice</span>
+            <div class="dropdown">
+                <button class="dropbtn">English EN</button>
+                <div id="myDrodown" class="dropdown-content">
+                    <a href="#">English EN</a>
+                    <a href="#">French FR</a>
+                    <a href="#">Spanish ES</a>
                 </div>
             </div>
         </div>
-        <div id="content">
-            <div id="search-result-container" class="tab-content">
-                <h2 id="search-label"></h2>
-            </div>
+        <div>
+            <button id='tester'>test</button>
         </div>
-    </body>
-    <script>
-    var Http = new XMLHttpRequest();
-    document.getElementById('tester').addEventListener("click", function (){
-        document.getElementById('tester').innerHTML = "brobro";
-        var url = 'https://send-hkj-email.herokuapp.com/weekly';
-        var email = 'nuraht.raj@gmail.com';
-        var sendJson = JSON.stringify({email: email, data: "waddup"});
-        //console.log(sendJson);
-        //Http.onreadystatechange = function () {
-            Http.open("POST", url, true);
-            console.log("reached");
-            Http.setRequestHeader("Content-type", "application/json");
-            Http.send(sendJson);
-        //}
-});
-    </script>
+</body>
+<script src="index.js"></script>
 </html>

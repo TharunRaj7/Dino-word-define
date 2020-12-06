@@ -16,7 +16,6 @@ chrome.runtime.onMessage.addListener(
       console.log("Received a definition!...")
       console.log(request.definition);
 
-      sendResponse({ farewell: "Content received definition..." });
       // after this point, can populate pop up, and make it visible.
       definitionJSON = JSON.parse(request.definition);
       console.log(definitionJSON);
@@ -27,6 +26,7 @@ chrome.runtime.onMessage.addListener(
       var exampleModal = getExampleModal();
 
       console.log(word);
+      //sendResponse({wordDefined: word});
       // Init the modal if it hasn't been already.
       if (!exampleModal) { exampleModal = initExampleModal(); }
       var html =
@@ -37,18 +37,20 @@ chrome.runtime.onMessage.addListener(
         name +
         '</div></div>' +
         '<div class="modal-body">' +
+        '<p>Learn to Pronounce!</p>'+
         '<audio controls> <source src=' + audioLink + ' type="audio/mpeg">Your browser does not support the audio element. </audio>' +
         '</div>';
       var linebreak = document.createElement('br');
       var footer = document.createElement('div');
       footer.classList.add('modal-footer');
       var button = document.createElement('button');
-      button.classList.add('btn');
-      button.classList.add('btn-primary');
+      button.classList.add('btn-modal');
+      button.classList.add('btn-primary-modal');
+      button.setAttribute("id", "listAdd")
       button.innerHTML = "Add it to your list";
       var button2 = document.createElement('button');
-      button2.classList.add('btn');
-      button2.classList.add('btn-secondary');
+      button2.classList.add('btn-modal');
+      button2.classList.add('btn-secondary-modal');
       button2.innerHTML = "Close";
       button.addEventListener("click", check);
       button2.addEventListener("click", remove);
@@ -115,6 +117,7 @@ chrome.runtime.onMessage.addListener(
       // Show the modal.
       // jQuery(exampleModal).modal('show');
       // document.body.insertBefore(exampleModal, document.body.firstChild);
+      return true;
     }
   });
 

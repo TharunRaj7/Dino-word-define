@@ -121,6 +121,7 @@ chrome.runtime.onMessage.addListener(
       st.fontStyle = "italic";
       st.position = "fixed";
       st.background = 'black';
+      st.borderRadius="10px"
       // exampleModal.ondragover= (e)=> { exampleModal.style.left = e.pageX + 'px';
       // exampleModal.style.top = e.pageY + 'px';}
       // exampleModal.ondrag= (e)=> { exampleModal.style.left = e.pageX + 'px';

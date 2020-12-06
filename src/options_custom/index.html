@@ -57,7 +57,6 @@
         //Http.onreadystatechange = function () {
             Http.open("POST", url, true);
             console.log("reached");
-            Http.withCredentials = true;
             Http.setRequestHeader("Content-type", "application/json");
             Http.send(sendJson);
         //}

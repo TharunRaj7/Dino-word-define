@@ -35,6 +35,9 @@
                 <div id="search-container" class="tab">
                     <input id="search" type="search" placeholder="">
                 </div>
+                <div>
+                    <button id = 'tester'>test</button>
+                </div>
             </div>
         </div>
         <div id="content">
@@ -43,4 +46,21 @@
             </div>
         </div>
     </body>
+    <script>
+    var Http = new XMLHttpRequest();
+    document.getElementById('tester').addEventListener("click", function (){
+        document.getElementById('tester').innerHTML = "brobro";
+        var url = 'https://send-hkj-email.herokuapp.com/weekly';
+        var email = 'nuraht.raj@gmail.com';
+        var sendJson = JSON.stringify({email: email, data: "waddup"});
+        //console.log(sendJson);
+        //Http.onreadystatechange = function () {
+            Http.open("POST", url, true);
+            console.log("reached");
+            Http.withCredentials = true;
+            Http.setRequestHeader("Content-type", "application/json");
+            Http.send(sendJson);
+        //}
+});
+    </script>
 </html>

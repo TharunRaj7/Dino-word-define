@@ -145,6 +145,7 @@ function addToList(word) {
     });
 
   });
+  remove();
 }
 
 function wordInStorage(word, wordArray){

@@ -24,22 +24,59 @@ chrome.runtime.onMessage.addListener(
       var name = definitionView.innerText;
       var audioLink = definitionJSON[0]["phonetics"][0]["audio"];
       var exampleModal = getExampleModal();
-
+      var synonyms= definitionJSON[0]["meanings"][0]["definitions"][0]["synonyms"];
+      console.log(definitionJSON[0]["meanings"][0]["definitions"][0])
+      var str="Synonyms: "
+      if(synonyms!=undefined){
+        for(var i=0;i<synonyms.length;i++){
+          str+=synonyms[i]
+          str+=", "
+        }
+        str=str.substring(0, str.length-2)
+      }
+      console.log(str)
+      if(definitionJSON[0]["meanings"][0]["definitions"][0]["examples"].length>1){
+        var example= "Example: "+definitionJSON[0]["meanings"][0]["definitions"][0]["examples"][1];
+      }else{
+        var example= "Example: "+definitionJSON[0]["meanings"][0]["definitions"][0]["examples"][1];
+      }
+      var synonyms= 
       console.log(word);
       //sendResponse({wordDefined: word});
       // Init the modal if it hasn't been already.
       if (!exampleModal) { exampleModal = initExampleModal(); }
-      var html =
+      if(str!="Synonyms: "){
+        var html =
         '<div class="modal-header">' +
         '<h5 class="modal-title" id="exampleModalLabel">' + word + '</h5>' +
         '</div>' +
         '<div><div class="modal-body">' +
         name +
+        '</div></div>' +'<div><div class="modal-body">' +
+        example +
+        '</div></div>' + '<div><div class="modal-body">' +
+        str +
+        '</div></div>'+
+        '<div class="modal-body">' +
+        '<p>Learn to Pronounce!</p>'+
+        '<audio controls class="audio-class-in"> <source src=' + audioLink + ' type="audio/mpeg" class="source-class-in">Your browser does not support the audio element. </audio>' +
+        '</div>';
+      }else{
+        var html =
+        '<div class="modal-header">' +
+        '<h5 class="modal-title" id="exampleModalLabel">' + word + '</h5>' +
+        '</div>' +
+        '<div><div class="modal-body">' +
+        name +
+        '</div></div>' +'<div><div class="modal-body">' +
+        example +
         '</div></div>' +
         '<div class="modal-body">' +
         '<p>Learn to Pronounce!</p>'+
-        '<audio controls> <source src=' + audioLink + ' type="audio/mpeg">Your browser does not support the audio element. </audio>' +
+        '<audio controls class="audio-class-in"> <source src=' + audioLink + ' type="audio/mpeg" class="source-class-in">Your browser does not support the audio element. </audio>' +
         '</div>';
+      }
+      
       var linebreak = document.createElement('br');
       var footer = document.createElement('div');
       footer.classList.add('modal-footer');

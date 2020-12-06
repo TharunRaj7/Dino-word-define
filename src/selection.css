@@ -53,18 +53,26 @@
 .modal-title{
     margin:5px;
     color:white;
+    font-size: small;
 }
 
 .modal-body{
     margin:10px;
     max-width:300px;
+    font-size: x-small;
     word-wrap:break-word;
     white-space: pre-wrap;
     word-break: break-word;
     overflow-wrap: normal;
 }
-
-
+.audio-class-in{
+  max-height: 13px;
+  color:white;
+  padding:3px;
+}
+.source-class-in{
+  max-height: 7px;
+}
 .btn-modal {
   display: inline-block;
   background: var(--light-color);

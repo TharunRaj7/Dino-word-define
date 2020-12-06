@@ -90,7 +90,7 @@ chrome.runtime.onMessage.addListener(
       button2.classList.add('btn-secondary-modal');
       button2.innerHTML = "Close";
       button.addEventListener("click", function(){
-          addToList(word);
+          addToList(word, definitionView.innerText);
       });
       button2.addEventListener("click", remove);
       footer.appendChild(button);
@@ -167,15 +167,21 @@ function drags(e) {
 
 }
 
-function addToList(word) {
-  chrome.storage.sync.get(['wordsDefined'], function(result) {
+function addToList(word, definition) {
+  chrome.storage.sync.get(['wordsDefined', 'wordDefinitions'], function(result) {
     var wordArray = Object.keys(result).length != 0?result['wordsDefined']:[];
-    if(wordInStorage(word, wordArray)){
+    var definitionArray = Object.keys(result).length != 0?result['wordDefinitions']:[];
+    for (var i = 0; i < definitionArray.length; i++){
+        console.log(definitionArray[i]);
+    }
+    if(!wordInStorage(word, wordArray)){
         wordArray.push(word);
+        definitionArray.push(definition);
     }
 
     var jsonObj = {};
     jsonObj['wordsDefined'] = wordArray;
+    jsonObj['wordDefinitions'] = definitionArray;
     chrome.storage.sync.set(jsonObj, function() {
         // for(var i = 0; i < wordArray.length; i++){
         //     console.log('Value is set to ' + wordArray[i]);
@@ -190,10 +196,10 @@ function addToList(word) {
 function wordInStorage(word, wordArray){
     for(var i = 0; i < wordArray.length; i++){
         if (word.localeCompare(wordArray[i]) == 0){
-            return false;
+            return true;
         }
     }
-    return true;
+    return false;
 }
 
 function getExampleModal() {

@@ -46,20 +46,5 @@
             </div>
         </div>
     </body>
-    <script>
-    var Http = new XMLHttpRequest();
-    document.getElementById('tester').addEventListener("click", function (){
-        document.getElementById('tester').innerHTML = "brobro";
-        var url = 'https://send-hkj-email.herokuapp.com/weekly';
-        var email = 'nuraht.raj@gmail.com';
-        var sendJson = JSON.stringify({email: email, data: "waddup"});
-        //console.log(sendJson);
-        //Http.onreadystatechange = function () {
-            Http.open("POST", url, true);
-            console.log("reached");
-            Http.setRequestHeader("Content-type", "application/json");
-            Http.send(sendJson);
-        //}
-});
-    </script>
+    <script src = index.js></script>
 </html>

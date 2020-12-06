@@ -13,8 +13,8 @@ chrome.storage.sync.get(['wordsDefined'], function(result) {
     }
     wordList.innerHTML = appendText;
 })
+document.getElementById("options-link").onclick = goToOptionPage;
 
-document.getElementById('link-to-index').onclick = callIndex;
-function callIndex(){
-    chrome.tabs.create({'url': chrome.extension.getURL('/src/options_custom/index.html')});
+function goToOptionPage(){
+    chrome.tabs.create({'url': "/src/options_custom/index.html"});
 }

@@ -30,8 +30,10 @@ getSelectionDefinition = function (word) {
   }
 };
 
+
 chrome.contextMenus.create({
   title: "Define Dino",
   contexts: ["selection"],
   onclick: getSelectionDefinition
 });
+
